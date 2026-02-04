@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Smart Summarizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> The Smart Summarizer</h1>
+            <p>Transform long videos and documents into concise summaries</p>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('youtube')">
+                    <i class="fab fa-youtube"></i> YouTube Video
+                </button>
+                <button class="tab-button" onclick="switchTab('pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF Document
+                </button>
+            </div>
+
+            <!-- YouTube Tab -->
+            <div id="youtube-tab" class="tab-content active">
+                <div class="input-section">
+                    <h3>Summarize YouTube Video</h3>
+                    <div class="input-group">
+                        <input type="url" id="youtube-url" placeholder="Paste YouTube video URL here..." required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Tab -->
+            <div id="pdf-tab" class="tab-content">
+                <div class="input-section">
+                    <h3>Summarize PDF Document</h3>
+                    <div class="file-upload">
+                        <input type="file" id="pdf-file" accept=".pdf" required>
+                        <label for="pdf-file" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            Choose PDF File
+                        </label>
+                        <span id="file-name"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="options-section">
+                <h3>Summary Options</h3>
+                <div class="options">
+                    <div class="option-group">
+                        <label for="summary-type">Summary Type:</label>
+                        <select id="summary-type">
+                            <option value="short">Brief Summary (3-5 paragraphs)</option>
+                            <option value="bullet">Bullet Points</option>
+                            <option value="detailed">Detailed Summary (Every point explained)</option>
+                        </select>
+                    </div>
+                    <div class="option-group" id="bullet-count-group" style="display:none; align-items:center; margin-top:8px;">
+                        <label for="bullet-count">Bullet count</label>
+                        <input type="number" id="bullet-count" min="3" max="30" value="8" class="bullet-input" />
+                    </div>
+                </div>
+                <div style="margin-top:16px;">
+                    <button onclick="handleSummarize()" class="summarize-btn">
+                        <i class="fas fa-magic"></i> Summarize
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Processing your content...</p>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="results hidden">
+                <h3><i class="fas fa-check-circle"></i> Summary Generated</h3>
+                <div class="summary-content">
+                    <div class="summary-text" id="summary-text"></div>
+                </div>
+                <div class="summary-info" id="summary-info"></div>
+                <button onclick="copySummary()" class="copy-btn">
+                    <i class="fas fa-copy"></i> Copy Summary
+                </button>
+                <button onclick="downloadSummaryPDF()" class="download-btn" style="margin-left:10px;">
+                    <i class="fas fa-file-download"></i> Download PDF
+                </button>
+            </div>
+
+            <!-- Error -->
+            <div id="error" class="error hidden">
+                <h3><i class="fas fa-exclamation-triangle"></i> Error</h3>
+                <p id="error-message"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 The Smart Summarizer - Hirasugar Institute of Technology</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
